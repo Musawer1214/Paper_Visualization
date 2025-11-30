@@ -46,18 +46,18 @@ export const SurfaceCodeDiagram: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col items-center p-8 bg-white rounded-xl shadow-sm border border-stone-200 my-8">
-      <h3 className="font-serif text-xl mb-4 text-stone-800">Interactive: Surface Code Detection</h3>
-      <p className="text-sm text-stone-500 mb-6 text-center max-w-md">
+    <div className="flex flex-col items-center p-8 bg-white dark:bg-stone-800 rounded-xl shadow-sm border border-stone-200 dark:border-stone-700 my-8 w-full">
+      <h3 className="font-serif text-xl mb-4 text-stone-800 dark:text-stone-100">Interactive: Surface Code Detection</h3>
+      <p className="text-sm text-stone-500 dark:text-stone-400 mb-6 text-center max-w-md">
         Click the grey <strong>Data Qubits</strong> to inject errors. Watch the colored <strong>Stabilizers</strong> light up when they detect an odd number of errors.
       </p>
       
-      <div className="relative w-64 h-64 bg-[#F5F4F0] rounded-lg border border-stone-200 p-4 flex flex-wrap justify-between content-between relative">
+      <div className="relative w-full max-w-[260px] aspect-square bg-[#F5F4F0] dark:bg-stone-900 rounded-lg border border-stone-200 dark:border-stone-700 p-4 flex flex-wrap justify-between content-between relative mx-auto">
          {/* Grid Lines */}
-         <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-20">
-            <div className="w-2/3 h-2/3 border border-stone-400"></div>
-            <div className="absolute w-full h-[1px] bg-stone-400"></div>
-            <div className="absolute h-full w-[1px] bg-stone-400"></div>
+         <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-20 dark:opacity-10">
+            <div className="w-2/3 h-2/3 border border-stone-400 dark:border-stone-500"></div>
+            <div className="absolute w-full h-[1px] bg-stone-400 dark:bg-stone-500"></div>
+            <div className="absolute h-full w-[1px] bg-stone-400 dark:bg-stone-500"></div>
          </div>
 
          {/* Stabilizers (Z=Blue, X=Red) - positioned absolutely for control */}
@@ -69,7 +69,7 @@ export const SurfaceCodeDiagram: React.FC = () => {
          ].map(stab => (
              <motion.div
                 key={`stab-${stab.id}`}
-                className={`absolute w-10 h-10 -ml-5 -mt-5 flex items-center justify-center text-white text-xs font-bold rounded-sm shadow-sm transition-all duration-300 ${activeStabilizers.includes(stab.id) ? stab.color + ' opacity-100 scale-110 ring-4 ring-offset-2 ring-stone-200' : 'bg-stone-300 opacity-40'}`}
+                className={`absolute w-10 h-10 -ml-5 -mt-5 flex items-center justify-center text-white text-xs font-bold rounded-sm shadow-sm transition-all duration-300 ${activeStabilizers.includes(stab.id) ? stab.color + ' opacity-100 scale-110 ring-4 ring-offset-2 ring-stone-200 dark:ring-stone-700' : 'bg-stone-300 dark:bg-stone-700 opacity-40'}`}
                 style={{ left: stab.x, top: stab.y }}
              >
                  {stab.type}
@@ -85,7 +85,7 @@ export const SurfaceCodeDiagram: React.FC = () => {
              <button
                 key={`data-${q.id}`}
                 onClick={() => toggleError(q.id)}
-                className={`absolute w-8 h-8 -ml-4 -mt-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 z-10 ${errors.includes(q.id) ? 'bg-stone-800 border-stone-900 text-nobel-gold' : 'bg-white border-stone-300 hover:border-stone-500'}`}
+                className={`absolute w-8 h-8 -ml-4 -mt-4 rounded-full border-2 flex items-center justify-center transition-all duration-200 z-10 ${errors.includes(q.id) ? 'bg-stone-800 dark:bg-stone-200 border-stone-900 dark:border-white text-nobel-gold dark:text-stone-900' : 'bg-white dark:bg-stone-800 border-stone-300 dark:border-stone-600 hover:border-stone-500 dark:hover:border-stone-400'}`}
                 style={{ left: q.x, top: q.y }}
              >
                 {errors.includes(q.id) && <Activity size={14} />}
@@ -93,13 +93,13 @@ export const SurfaceCodeDiagram: React.FC = () => {
          ))}
       </div>
 
-      <div className="mt-6 flex items-center gap-4 text-xs font-mono text-stone-500">
-          <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-stone-800"></div> Error</div>
+      <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs font-mono text-stone-500 dark:text-stone-400">
+          <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-full bg-stone-800 dark:bg-stone-200"></div> Error</div>
           <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-sm bg-blue-500"></div> Z-Check</div>
           <div className="flex items-center gap-1"><div className="w-3 h-3 rounded-sm bg-red-500"></div> X-Check</div>
       </div>
       
-      <div className="mt-4 h-6 text-sm font-serif italic text-stone-600">
+      <div className="mt-4 h-6 text-sm font-serif italic text-stone-600 dark:text-stone-300">
         {errors.length === 0 ? "System is stable." : `Detected ${activeStabilizers.length} parity violations.`}
       </div>
     </div>
@@ -118,61 +118,71 @@ export const TransformerDecoderDiagram: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center p-8 bg-[#F5F4F0] rounded-xl border border-stone-200 my-8">
-      <h3 className="font-serif text-xl mb-4 text-stone-900">AlphaQubit Architecture</h3>
-      <p className="text-sm text-stone-600 mb-6 text-center max-w-md">
+    <div className="flex flex-col items-center p-8 bg-[#F5F4F0] dark:bg-stone-900 rounded-xl border border-stone-200 dark:border-stone-800 my-8 w-full">
+      <h3 className="font-serif text-xl mb-4 text-stone-900 dark:text-stone-100">AlphaQubit Architecture</h3>
+      <p className="text-sm text-stone-600 dark:text-stone-400 mb-6 text-center max-w-md">
         The model processes syndrome history using a recurrent transformer, attending to spatial and temporal correlations.
       </p>
 
-      <div className="relative w-full max-w-lg h-56 bg-white rounded-lg shadow-inner overflow-hidden mb-6 border border-stone-200 flex items-center justify-center gap-8 p-4">
+      <div className="relative w-full max-w-lg min-h-[14rem] bg-white dark:bg-stone-950 rounded-lg shadow-inner overflow-hidden mb-6 border border-stone-200 dark:border-stone-800 flex flex-col md:flex-row items-center justify-center gap-8 p-4">
         
         {/* Input Stage */}
         <div className="flex flex-col items-center gap-2">
-            <div className={`w-16 h-16 rounded-lg border-2 flex flex-col items-center justify-center transition-colors duration-500 ${step === 0 ? 'border-nobel-gold bg-nobel-gold/10' : 'border-stone-200 bg-stone-50'}`}>
+            <div className={`w-16 h-16 rounded-lg border-2 flex flex-col items-center justify-center transition-colors duration-500 ${step === 0 ? 'border-nobel-gold bg-nobel-gold/10' : 'border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900'}`}>
                 <div className="grid grid-cols-3 gap-1">
-                    {[...Array(9)].map((_, i) => <div key={i} className={`w-2 h-2 rounded-full ${Math.random() > 0.7 ? 'bg-stone-800' : 'bg-stone-300'}`}></div>)}
+                    {[...Array(9)].map((_, i) => <div key={i} className={`w-2 h-2 rounded-full ${Math.random() > 0.7 ? 'bg-stone-800 dark:bg-stone-200' : 'bg-stone-300 dark:bg-stone-700'}`}></div>)}
                 </div>
             </div>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-stone-500">Syndrome</span>
+            <span className="text-[10px] uppercase font-bold tracking-wider text-stone-500 dark:text-stone-400">Syndrome</span>
         </div>
 
         {/* Arrows */}
-        <motion.div animate={{ opacity: step >= 1 ? 1 : 0.3, x: step >= 1 ? 0 : -5 }}>→</motion.div>
+        <motion.div 
+            className="rotate-90 md:rotate-0"
+            animate={{ opacity: step >= 1 ? 1 : 0.3, x: step >= 1 ? 0 : -5 }}
+        >
+            <span className="text-stone-400 dark:text-stone-600">→</span>
+        </motion.div>
 
         {/* Transformer Stage */}
         <div className="flex flex-col items-center gap-2">
-             <div className={`w-24 h-24 rounded-xl border-2 flex flex-col items-center justify-center gap-2 transition-colors duration-500 relative overflow-hidden ${step === 1 || step === 2 ? 'border-stone-800 bg-stone-900 text-white' : 'border-stone-200 bg-stone-50'}`}>
-                <Cpu size={24} className={step === 1 || step === 2 ? 'text-nobel-gold animate-pulse' : 'text-stone-300'} />
+             <div className={`w-24 h-24 rounded-xl border-2 flex flex-col items-center justify-center gap-2 transition-colors duration-500 relative overflow-hidden ${step === 1 || step === 2 ? 'border-stone-800 dark:border-stone-100 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900' : 'border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900'}`}>
+                <Cpu size={24} className={step === 1 || step === 2 ? 'text-nobel-gold dark:text-purple-600 animate-pulse' : 'text-stone-300 dark:text-stone-700'} />
                 {step === 1 && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full h-[1px] bg-nobel-gold absolute top-1/3 animate-ping"></div>
-                        <div className="w-full h-[1px] bg-nobel-gold absolute top-2/3 animate-ping delay-75"></div>
+                        <div className="w-full h-[1px] bg-nobel-gold dark:bg-purple-500 absolute top-1/3 animate-ping"></div>
+                        <div className="w-full h-[1px] bg-nobel-gold dark:bg-purple-500 absolute top-2/3 animate-ping delay-75"></div>
                     </div>
                 )}
              </div>
-             <span className="text-[10px] uppercase font-bold tracking-wider text-stone-500">Transformer</span>
+             <span className="text-[10px] uppercase font-bold tracking-wider text-stone-500 dark:text-stone-400">Transformer</span>
         </div>
 
         {/* Arrows */}
-        <motion.div animate={{ opacity: step >= 3 ? 1 : 0.3, x: step >= 3 ? 0 : -5 }}>→</motion.div>
+        <motion.div 
+            className="rotate-90 md:rotate-0"
+            animate={{ opacity: step >= 3 ? 1 : 0.3, x: step >= 3 ? 0 : -5 }}
+        >
+            <span className="text-stone-400 dark:text-stone-600">→</span>
+        </motion.div>
 
         {/* Output Stage */}
         <div className="flex flex-col items-center gap-2">
-            <div className={`w-16 h-16 rounded-lg border-2 flex flex-col items-center justify-center transition-colors duration-500 ${step === 3 ? 'border-green-500 bg-green-50' : 'border-stone-200 bg-stone-50'}`}>
+            <div className={`w-16 h-16 rounded-lg border-2 flex flex-col items-center justify-center transition-colors duration-500 ${step === 3 ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900'}`}>
                 {step === 3 ? (
-                    <span className="text-2xl font-serif text-green-600">X</span>
+                    <span className="text-2xl font-serif text-green-600 dark:text-green-400">X</span>
                 ) : (
-                    <span className="text-2xl font-serif text-stone-300">?</span>
+                    <span className="text-2xl font-serif text-stone-300 dark:text-stone-700">?</span>
                 )}
             </div>
-            <span className="text-[10px] uppercase font-bold tracking-wider text-stone-500">Correction</span>
+            <span className="text-[10px] uppercase font-bold tracking-wider text-stone-500 dark:text-stone-400">Correction</span>
         </div>
 
       </div>
 
       <div className="flex gap-2">
           {[0, 1, 2, 3].map(s => (
-              <div key={s} className={`h-1 rounded-full transition-all duration-300 ${step === s ? 'w-8 bg-nobel-gold' : 'w-2 bg-stone-300'}`}></div>
+              <div key={s} className={`h-1 rounded-full transition-all duration-300 ${step === s ? 'w-8 bg-nobel-gold dark:bg-stone-400' : 'w-2 bg-stone-300 dark:bg-stone-700'}`}></div>
           ))}
       </div>
     </div>
@@ -183,12 +193,6 @@ export const TransformerDecoderDiagram: React.FC = () => {
 export const PerformanceMetricDiagram: React.FC = () => {
     const [distance, setDistance] = useState<3 | 5 | 11>(5);
     
-    // Values represent Logical Error Rate (approx %).
-    // Lower is better.
-    // Updated with correct Paper values:
-    // Dist 3: MWPM 3.5%, Alpha 2.9%
-    // Dist 5: MWPM 3.6%, Alpha 2.75%
-    // Dist 11: MWPM ~0.0041%, Alpha ~0.0009% (Based on paper's hard input simulation data)
     const data = {
         3: { mwpm: 3.5, alpha: 2.9 },
         5: { mwpm: 3.6, alpha: 2.75 },
@@ -196,7 +200,6 @@ export const PerformanceMetricDiagram: React.FC = () => {
     };
 
     const currentData = data[distance];
-    // Normalize to max value of current set to visually fill the chart, with some headroom
     const maxVal = Math.max(currentData.mwpm, currentData.alpha) * 1.25;
     
     const formatValue = (val: number) => {
@@ -205,13 +208,13 @@ export const PerformanceMetricDiagram: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col md:flex-row gap-8 items-center p-8 bg-stone-900 text-stone-100 rounded-xl my-8 border border-stone-800 shadow-lg">
+        <div className="flex flex-col md:flex-row gap-8 items-center p-8 bg-stone-900 dark:bg-black text-stone-100 rounded-xl my-8 border border-stone-800 dark:border-stone-900 shadow-lg w-full">
             <div className="flex-1 min-w-[240px]">
                 <h3 className="font-serif text-xl mb-2 text-nobel-gold">Performance vs Standard</h3>
                 <p className="text-stone-400 text-sm mb-4 leading-relaxed">
                     AlphaQubit consistently achieves lower logical error rates (LER) than the standard Minimum-Weight Perfect Matching (MWPM) decoder.
                 </p>
-                <div className="flex gap-2 mt-6">
+                <div className="flex gap-2 mt-6 flex-wrap">
                     {[3, 5, 11].map((d) => (
                         <button 
                             key={d}
@@ -228,7 +231,7 @@ export const PerformanceMetricDiagram: React.FC = () => {
                 </div>
             </div>
             
-            <div className="relative w-64 h-72 bg-stone-800/50 rounded-xl border border-stone-700/50 p-6 flex justify-around items-end">
+            <div className="relative w-full max-w-[260px] h-72 bg-stone-800/50 dark:bg-stone-900/50 rounded-xl border border-stone-700/50 p-6 flex justify-around items-end">
                 {/* Background Grid Lines */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-between pointer-events-none opacity-10">
                    <div className="w-full h-[1px] bg-stone-400"></div>
@@ -240,7 +243,7 @@ export const PerformanceMetricDiagram: React.FC = () => {
                 {/* MWPM Bar */}
                 <div className="w-20 flex flex-col justify-end items-center h-full z-10">
                     <div className="flex-1 w-full flex items-end justify-center relative mb-3">
-                        <div className="absolute -top-5 w-full text-center text-sm font-mono text-stone-400 font-bold bg-stone-900/90 py-1 px-2 rounded backdrop-blur-sm border border-stone-700/50 shadow-sm">{formatValue(currentData.mwpm)}</div>
+                        <div className="absolute -top-5 w-full text-center text-sm font-mono text-stone-400 font-bold bg-stone-900/90 py-1 px-2 rounded backdrop-blur-sm border border-stone-700/50 shadow-sm z-20">{formatValue(currentData.mwpm)}</div>
                         <motion.div 
                             className="w-full bg-stone-600 rounded-t-md border-t border-x border-stone-500/30"
                             initial={{ height: 0 }}
@@ -248,13 +251,13 @@ export const PerformanceMetricDiagram: React.FC = () => {
                             transition={{ type: "spring", stiffness: 80, damping: 15 }}
                         />
                     </div>
-                    <div className="h-6 flex items-center text-xs font-bold text-stone-500 uppercase tracking-wider">Standard</div>
+                    <div className="h-6 flex items-center text-xs font-bold text-stone-500 uppercase tracking-wider text-center">Standard</div>
                 </div>
 
                 {/* AlphaQubit Bar */}
                 <div className="w-20 flex flex-col justify-end items-center h-full z-10">
                      <div className="flex-1 w-full flex items-end justify-center relative mb-3">
-                        <div className="absolute -top-5 w-full text-center text-sm font-mono text-nobel-gold font-bold bg-stone-900/90 py-1 px-2 rounded backdrop-blur-sm border border-nobel-gold/30 shadow-sm">{formatValue(currentData.alpha)}</div>
+                        <div className="absolute -top-5 w-full text-center text-sm font-mono text-nobel-gold font-bold bg-stone-900/90 py-1 px-2 rounded backdrop-blur-sm border border-nobel-gold/30 shadow-sm z-20">{formatValue(currentData.alpha)}</div>
                         <motion.div 
                             className="w-full bg-nobel-gold rounded-t-md shadow-[0_0_20px_rgba(197,160,89,0.25)] relative overflow-hidden"
                             initial={{ height: 0 }}
@@ -265,7 +268,7 @@ export const PerformanceMetricDiagram: React.FC = () => {
                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-white/20"></div>
                         </motion.div>
                     </div>
-                     <div className="h-6 flex items-center text-xs font-bold text-nobel-gold uppercase tracking-wider">AlphaQubit</div>
+                     <div className="h-6 flex items-center text-xs font-bold text-nobel-gold uppercase tracking-wider text-center">Alpha</div>
                 </div>
             </div>
         </div>
