@@ -7,7 +7,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KeyConcept } from '../types';
-import { Network, Box, Activity, Zap, Search, X, Layers, Cpu, FileText, ChevronDown, ChevronUp } from 'lucide-react';
+import { Network, Box, Activity, Zap, Search, X, Layers, ChevronDown } from 'lucide-react';
 
 interface GenericVisualizerProps {
   concepts: KeyConcept[];
@@ -87,11 +87,18 @@ export const ConceptNetwork: React.FC<GenericVisualizerProps> = ({ concepts, the
                <X size={14} />
              </button>
            )}
-           {searchTerm && (
-              <div className="absolute -bottom-6 right-0 text-xs font-medium text-stone-400 animate-fade-in">
-                  Found {filteredConcepts.length} result{filteredConcepts.length !== 1 ? 's' : ''}
-              </div>
-           )}
+           <AnimatePresence>
+             {searchTerm && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  className="absolute -bottom-6 right-0 text-xs font-medium text-stone-400"
+                >
+                    Found {filteredConcepts.length} result{filteredConcepts.length !== 1 ? 's' : ''}
+                </motion.div>
+             )}
+           </AnimatePresence>
         </div>
       </div>
 
@@ -111,7 +118,16 @@ export const ConceptNetwork: React.FC<GenericVisualizerProps> = ({ concepts, the
               layout
               key={concept.title}
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1, 
+                y: 0,
+                transition: { 
+                  duration: 0.4, 
+                  delay: idx * 0.1, // Staggered animation
+                  ease: "easeOut"
+                } 
+              }}
               exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
               onClick={() => setActiveId(isActive ? null : idx)}

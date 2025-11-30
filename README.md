@@ -1,35 +1,104 @@
+# ScholarLens AI
 
-# ScholarLens AI: Research Visualizer
+**ScholarLens AI** is a next-generation research visualization platform that transforms dense academic papers into immersive, interactive web experiences. 
 
-An interactive web application that transforms dense research papers into engaging, interactive web experiences. Originally designed for the "AlphaQubit" paper, it now uses **Google Gemini 2.5 Flash** to analyze and visualize any research abstract you provide.
+Powered by **Google Gemini 2.5 Flash**, it reads PDF manuscripts or abstracts and instantly generates a 3D visual narrative, extracting key concepts, structural diagrams, and thematic aesthetics automatically.
 
-## Features
+![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg) ![React](https://img.shields.io/badge/React-19-blue) ![Gemini](https://img.shields.io/badge/AI-Gemini_2.5-purple)
 
-*   **AI-Powered Analysis**: Paste any research abstract, and the app uses the Gemini API to extract the title, authors, summary, and key concepts.
-*   **Dynamic Theming**: The application automatically categorizes papers into themes (Quantum, AI, Biology, Cosmos, etc.) and adjusts the color palette and 3D background animations accordingly.
-*   **Interactive Visualizations**:
-    *   **3D Particle Scenes**: Real-time React Three Fiber backgrounds that shift geometry based on the research topic.
-    *   **Concept Networks**: An interactive graph of key concepts extracted from the text.
-*   **Original Demo**: Includes the highly specific, hardcoded interactive diagrams for the AlphaQubit paper (Surface Code simulation, Transformer architecture) as a demonstration of high-fidelity manual visualization.
+## 🌟 Key Features
 
-## Tech Stack
+### 🧠 AI-Powered Analysis
+*   **Multimodal Input**: Upload full PDF research papers or paste raw text abstracts.
+*   **Semantic Extraction**: Uses Gemini 2.5 Flash to identify the paper's title, authors, core summary, and impact.
+*   **Concept Mapping**: Automatically extracts and categorizes key concepts into 'Processes', 'Structures', or 'Abstract' ideas.
 
-*   **React 19**: Core component library.
-*   **Google Gemini API**: For text analysis and content generation.
-*   **React Three Fiber (Three.js)**: High-performance 3D graphics.
-*   **Framer Motion**: Complex animations and transitions.
-*   **Tailwind CSS**: Styling.
+### 🎨 Adaptive Visual Engine
+*   **Dynamic Theming**: The app analyzes the paper's domain (Quantum, AI, Biology, Cosmos, etc.) and fundamentally changes the 3D environment, color palette, and geometry to match.
+*   **3D Hero Scenes**: 
+    *   *Quantum*: Golden waves and probability fields.
+    *   *AI*: Neural grids and floating data nodes.
+    *   *Biology*: Organic, cellular, and soft-body simulations.
+    *   *Cosmos*: Planetary orbits and gravitational lensing.
 
-## How to Use
+### ⚡ Interactive Experience
+*   **Concept Network**: A filterable, interactive grid of extracted ideas.
+*   **Hardware Simulation**: (Demo Only) A fully interactive simulation of the "AlphaQubit" Surface Code error correction.
+*   **Mouse Parallax**: Subtle 3D camera rigging that responds to user cursor movement for depth perception.
 
-1.  **Enter API Key**: Ensure your environment has a valid `API_KEY` for the Google GenAI SDK.
-2.  **Paste Text**: Click "New Paper" in the navigation bar. Paste the abstract or introduction of a paper.
-3.  **Generate**: Click "Generate Visualization". The app will rebuild itself around your content.
-4.  **Explore**: Scroll through the narrative, interact with the concept cards, and enjoy the 3D atmosphere.
+## 🛠️ Architecture
 
-## Development
+The application is built using a modern React stack optimized for performance and visuals.
 
-To run locally:
-1.  Clone the repo.
-2.  `npm install`
-3.  `npm run dev`
+| Component | Technology | Purpose |
+|O---|---|---|
+| **Core** | React 19 | Component lifecycle and state management. |
+| **AI** | Google GenAI SDK | Interfacing with Gemini 2.5 Flash for analysis. |
+| **3D** | React Three Fiber | Rendering WebGL scenes declaratively. |
+| **Styling** | Tailwind CSS | Utility-first responsive design and dark mode. |
+| **Motion** | Framer Motion | Complex layout transitions and scroll animations. |
+
+### Directory Structure
+```
+/src
+  ├── components/
+  │   ├── DynamicScene.tsx    # The adaptive 3D background engine
+  │   ├── GenericVisualizer.tsx # Interactive concept cards for custom papers
+  │   ├── Diagrams.tsx        # Hardcoded interactive diagrams for AlphaQubit demo
+  │   ├── Navigation.tsx      # Responsive nav & glassmorphism logic
+  │   ├── InputModal.tsx      # File upload & loading state management
+  ├── App.tsx                 # Main controller and layout
+  ├── types.ts                # TypeScript interfaces for PaperData
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+*   Node.js 18+
+*   A Google Cloud Project with the Gemini API enabled.
+*   An API Key stored in your environment.
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/your-username/scholarlens-ai.git
+    cd scholarlens-ai
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Set up Environment**
+    Create a `.env` file in the root:
+    ```env
+    API_KEY=your_google_gemini_api_key
+    ```
+
+4.  **Run Development Server**
+    ```bash
+    npm run dev
+    ```
+
+## 📖 How to Use
+
+1.  **Landing**: The app loads with the "AlphaQubit" demo to showcase the potential of high-fidelity manual visualization.
+2.  **New Analysis**: Click the **"New Paper"** button in the top right.
+3.  **Upload**: Drag and drop a PDF file or paste an abstract.
+4.  **Visualize**: Watch as the AI reads the document (Status: *Reading* -> *Analyzing* -> *Generating*) and rebuilds the website around your research.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1.  Fork the project
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
+
+## 📄 License
+
+Distributed under the Apache 2.0 License.
